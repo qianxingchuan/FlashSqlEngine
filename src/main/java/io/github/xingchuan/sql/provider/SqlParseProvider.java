@@ -6,7 +6,7 @@ import cn.hutool.json.JSONObject;
  * sql转换的提供类
  *
  * @author xingchuan.qxc
- * @date 2022/10/6
+ * @since 1.0
  */
 public interface SqlParseProvider {
 

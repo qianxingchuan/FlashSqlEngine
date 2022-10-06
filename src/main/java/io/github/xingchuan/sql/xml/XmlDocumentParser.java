@@ -21,7 +21,7 @@ import java.util.Map;
  * 读取xml的文件配置
  *
  * @author xingchuan.qxc
- * @date 2022/10/6
+ * @since 1.0
  */
 public class XmlDocumentParser {
 
@@ -32,7 +32,7 @@ public class XmlDocumentParser {
      *
      * @param document xml doc对象
      * @param type     select ? update ? delete? insert?
-     * @return key-> sqlId value -> sql Template Content
+     * @return key: sqlId value: sql Template Content
      */
     public static Map<String, String> fetchXmlDocumentSql(Document document, String type) {
         Map<String, String> resultSqlIdMap = new HashMap<>();

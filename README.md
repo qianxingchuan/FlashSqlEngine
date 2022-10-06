@@ -15,6 +15,18 @@ FlashSqlEngine，本质就是一个模板引擎，用来渲染出来一个可执
 
 ## How to use ?
 
+### maven 依赖
+
+```
+     
+        <dependency>
+            <groupId>io.github.flash-query</groupId>
+            <artifactId>FlashSqlEngine</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+```
+
 ### 场景1：
 #### 1、 在类路径下创建一个配置文件 ` my-1st-mapper.xml ` ，比如位置在 ` resources ` 
 

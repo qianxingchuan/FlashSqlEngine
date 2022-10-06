@@ -27,7 +27,7 @@ import static io.github.xingchuan.sql.provider.impl.DefaultMybatisSqlParseProvid
  * 模板的引擎类，用于根据模板生成sql内容
  *
  * @author xingchuan.qxc
- * @date 2022/10/6
+ * @since 1.0
  */
 public class FlashSqlEngine {
 
