@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="not_necessary">
+
+    <select id="testLogin">
+        select * from t_user where code = #{code} and password = #{password}
+    </select>
+    <select id="testQuery">
+        select * from t_user
+        where tenant_code ='xingchuan'
+        <if test="userCode != null">
+            and user_code = #{userCode}
+        </if>
+        <if test="userName != null">
+            and user_name = #{userName}
+        </if>
+    </select>
+    <insert id="testInsert">
+        insert into t_user
+        (gmt_create,gmt_modified,user_code,user_name,tenant_code)
+        values
+        <foreach collection="userList" item="user" separator=",">
+            (now(),now(),#{user.code},#{user.name},#{user.tenantCode})
+        </foreach>
+    </insert>
+    <update id="testUpdate">
+        update t_user
+        set gmt_modified = now(),
+            user_name    = #{user.name}
+        where tenant_code = #{user.tenantCode}
+          and user_code = #{user.code}
+    </update>
+    <delete id="testDelete">
+        delete t_user
+        where tenant_code = #{user.tenantCode}
+        and user_code = #{user.code}
+    </delete>
+</mapper>
