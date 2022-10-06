@@ -47,8 +47,8 @@ public class FlashSqlEngine {
     /**
      * 注册一个sql转换类型
      *
-     * @param typeCode
-     * @param provider
+     * @param typeCode sql转换器类型code
+     * @param provider sql转换器对象
      */
     public void registerSqlParseProvider(String typeCode, SqlParseProvider provider) {
         this.sqlParseProviderMap.put(typeCode, provider);
@@ -58,7 +58,8 @@ public class FlashSqlEngine {
     /**
      * 根据configFilePath，初始化内容
      *
-     * @param configFilePath
+     * @param configFilePath 待加载的资源位置
+     * @throws IOException
      */
     public void loadConfig(String configFilePath) throws IOException {
         try (InputStream inputStream = loadConfigSourceStream(configFilePath)) {
@@ -78,9 +79,9 @@ public class FlashSqlEngine {
     /**
      * 转换sqlId 的内容成为可执行的sql
      *
-     * @param sqlId
-     * @param params
-     * @return
+     * @param sqlId  配置文件中的sqlId
+     * @param params 构建的参数Json对象
+     * @return 渲染完成的sql
      */
     public String parseSqlWithSqlId(String sqlId, JSONObject params) {
         return parseSqlWithSqlId(sqlId, params, MYBATIS_SQL_TYPE);
@@ -89,10 +90,10 @@ public class FlashSqlEngine {
     /**
      * 转换sqlId 的内容成为可执行的sql
      *
-     * @param sqlId
-     * @param params
-     * @param providerType
-     * @return
+     * @param sqlId        配置文件中的sqlId
+     * @param params       构建的参数Json对象
+     * @param providerType 转换器类型code
+     * @return 渲染完成的sql
      */
     public String parseSqlWithSqlId(String sqlId, JSONObject params, String providerType) {
         if (StrUtil.isBlank(sqlId)) {
@@ -108,9 +109,9 @@ public class FlashSqlEngine {
     /**
      * 转换成为可以执行的sql
      *
-     * @param template
-     * @param params
-     * @return
+     * @param template 模板内容
+     * @param params   构建的参数JSON对象
+     * @return 渲染完成的sql
      */
     public String parseSql(String template, JSONObject params, String providerType) {
         SqlParseProvider sqlParseProvider = sqlParseProviderMap.get(providerType);
@@ -124,8 +125,8 @@ public class FlashSqlEngine {
     /**
      * 将path转换成对应的字节流
      *
-     * @param configFilePath
-     * @return
+     * @param configFilePath 配置文件的位置
+     * @return 对应的字节输入流
      */
     private InputStream loadConfigSourceStream(String configFilePath) {
         File configFile = FileUtil.file(configFilePath);

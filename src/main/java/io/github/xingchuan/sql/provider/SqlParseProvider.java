@@ -13,16 +13,16 @@ public interface SqlParseProvider {
     /**
      * 转换sql
      *
-     * @param template
-     * @param params
-     * @return
+     * @param template 模板内容
+     * @param params   参数JSON对象
+     * @return 渲染完成的sql
      */
     String parseSql(String template, JSONObject params);
 
     /**
      * 该provider的类型，在同一个应用内，应该唯一
      *
-     * @return
+     * @return 转换器类型code
      */
     String type();
 }
