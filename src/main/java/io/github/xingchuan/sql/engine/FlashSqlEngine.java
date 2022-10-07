@@ -80,6 +80,7 @@ public class FlashSqlEngine {
      *
      * @param sqlId    sqlId
      * @param template 模板
+     * @since 1.0.1
      */
     public void saveSqlTemplate(String sqlId, String template) {
         this.sqlIdMap.put(sqlId, template);
@@ -91,6 +92,7 @@ public class FlashSqlEngine {
      *
      * @param sqlId sqlId
      * @return 对应的模板content
+     * @since 1.0.1
      */
     public String fetchSqlTemplate(String sqlId) {
         return this.sqlIdMap.get(sqlId);
