@@ -36,13 +36,13 @@ public class FlashSqlEngine {
     /**
      * 从配置文件读出来的sqlId映射，key -> sqlId value -> sql模板内容
      */
-    private Map<String, String> sqlIdMap = new HashMap<>();
+    private final Map<String, String> sqlIdMap = new HashMap<>();
 
 
     /**
      * sql转换内容的提供类
      */
-    private Map<String, SqlParseProvider> sqlParseProviderMap = new HashMap();
+    private final Map<String, SqlParseProvider> sqlParseProviderMap = new HashMap<>();
 
     /**
      * 注册一个sql转换类型
@@ -68,13 +68,34 @@ public class FlashSqlEngine {
             sqlIdMap.putAll(XmlDocumentParser.fetchXmlDocumentSql(document, "update"));
             sqlIdMap.putAll(XmlDocumentParser.fetchXmlDocumentSql(document, "insert"));
             sqlIdMap.putAll(XmlDocumentParser.fetchXmlDocumentSql(document, "delete"));
-        } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
-        } catch (SAXException e) {
+        } catch (ParserConfigurationException | SAXException e) {
             throw new RuntimeException(e);
         }
 
     }
+
+
+    /**
+     * 新增一个sql模板
+     *
+     * @param sqlId    sqlId
+     * @param template 模板
+     */
+    public void saveSqlTemplate(String sqlId, String template) {
+        this.sqlIdMap.put(sqlId, template);
+        logger.info("sqlId {} added. ", sqlId);
+    }
+
+    /**
+     * 获取一个sql模板
+     *
+     * @param sqlId sqlId
+     * @return 对应的模板content
+     */
+    public String fetchSqlTemplate(String sqlId) {
+        return this.sqlIdMap.get(sqlId);
+    }
+
 
     /**
      * 转换sqlId 的内容成为可执行的sql
@@ -99,7 +120,7 @@ public class FlashSqlEngine {
         if (StrUtil.isBlank(sqlId)) {
             return StrUtil.EMPTY;
         }
-        String sqlTemplateContent = sqlIdMap.get(sqlId);
+        String sqlTemplateContent = fetchSqlTemplate(sqlId);
         if (StrUtil.isBlank(sqlTemplateContent)) {
             return StrUtil.EMPTY;
         }

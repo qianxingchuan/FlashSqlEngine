@@ -6,7 +6,7 @@
 
     <groupId>io.github.flash-query</groupId>
     <artifactId>FlashSqlEngine</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
     <name>Flash Sql Engine</name>
     <url>https://github.com/flash-query/FlashSqlEngine</url>
